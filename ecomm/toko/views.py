@@ -8,7 +8,7 @@ from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 
 
-from .forms import CheckoutForm
+from .forms import CheckoutForm 
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
 
 class HomeListView(generic.ListView):
