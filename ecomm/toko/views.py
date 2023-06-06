@@ -6,10 +6,11 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
+from django.urls import reverse_lazy
 
 
-from .forms import CheckoutForm
-from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
+from .forms import CheckoutForm, ContactForm
+from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Contact
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
@@ -19,6 +20,16 @@ class HomeListView(generic.ListView):
 class ProductDetailView(generic.DetailView):
     template_name = 'product_detail.html'
     queryset = ProdukItem.objects.all()
+    
+class ContactPageView(generic.FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('toko:contact')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
 
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):
