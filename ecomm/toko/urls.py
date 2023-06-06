@@ -5,6 +5,7 @@ app_name = 'toko'
 
 urlpatterns = [
      path('', views.HomeListView.as_view(), name='home-produk-list'),
+     path('carousel/', views.ProductList.as_view(), name='produk-list'),
      path('product/<slug>/', views.ProductDetailView.as_view(), name='produk-detail'),
      path('contact', views.ContactPageView.as_view(), name='contact'),
      path('contact/success/', views.contact_success, name='contact_success'),
