@@ -198,7 +198,7 @@ def paypal_return(request):
             payment.charge_id = f'{order.id}-{timezone.now()}'
             payment.timestamp = timezone.now()
             payment.save()
-            
+
             order_produk_item = OrderProdukItem.objects.filter(user=request.user,ordered=False)
             order_produk_item.update(ordered=True)
             
