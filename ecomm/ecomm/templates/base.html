@@ -9,15 +9,14 @@
 
     <link rel="apple-touch-icon" href="{% static '/img/apple-icon.png' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/templatemo.css' %}">
     <link rel="stylesheet" href="{% static '/css/custom.css' %}">
 
     <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="{% static '/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
 
 </head>
 
@@ -61,7 +60,7 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
+                            <a class="nav-link" href="/carousel">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
@@ -119,19 +118,8 @@
         </div>
     </div>
 
-
-
-    <!-- Start Banner Hero -->
-{% block banner %}
-{% endblock banner %}
-    <!-- End Banner Hero -->
-
-
-    <!-- Start Categories of The Month -->
-{% block categories %}
-{% endblock categories %}
-    <!-- End Categories of The Month -->
-
+{% block content %}
+{% endblock content %}
 
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
