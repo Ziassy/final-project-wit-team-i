@@ -8,8 +8,14 @@ from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 
 
-from .forms import CheckoutForm
+from .forms import CheckoutForm 
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
+
+class ProductList(generic.ListView):
+    template_name = 'carousel.html'
+    queryset = ProdukItem.objects.all()
+    paginate_by = 4
+
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
