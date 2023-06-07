@@ -86,7 +86,7 @@ def handlelogin(request):
 
     return render(request,'account/login.html')   
 
-@csrf_protect
+@csrf_protect #Prevention CSRF (Cross-Site Request Forgery)
 def handle_logout(request):
     logout(request)
     # Untuk redirect ke page home ( / ) setelah logout
