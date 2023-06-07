@@ -4,32 +4,32 @@
 <!-- Start Content -->
     <div class="container py-5">
         <div class="row">
-
             <div class="col-lg-3">
-                <h1 class="h2 pb-4">Categories</h1>
-                <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Fashion
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Man
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Women
-                                </label>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
+                <form action="/carousel" method="get">
+                    <ul class="list-unstyled templatemo-accordion">
+                        <li class="pb-3">
+                            <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                                Categories
+                                <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            </a>
+                            <ul class="collapse show list-unstyled pl-3">
+                                {% for category in categories %}
+                                <li>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="category" value="{{ category }}" id="category_{{ forloop.counter }}" {% if category in selected_categories %}checked{% endif %}>
+                                        <label class="form-check-label" for="category_{{ forloop.counter }}">
+                                            {{ category }}
+                                        </label>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-success py-2">Apply</button>
+                </form>
             </div>
+
 
             <div class="col-lg-9">
                 <div class="row">

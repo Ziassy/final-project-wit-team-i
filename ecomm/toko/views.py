@@ -11,12 +11,33 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 from .forms import CheckoutForm, ContactForm
-from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Contact
+from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Contact, PILIHAN_KATEGORI
 
 class ProductList(generic.ListView):
     template_name = 'carousel.html'
     queryset = ProdukItem.objects.all()
-    paginate_by = 4
+    # paginate_by = 4
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = {
+            'S': 'Shirt',
+            'SW': 'Sportswear',
+            'OW': 'Outerwear'
+        }  # Dictionary mapping category codes to their corresponding names
+        selected_categories_values = self.request.GET.getlist('category')  # Get selected categories from the request
+        selected_categories_keys = [category for category, name in categories.items() if name in selected_categories_values]
+        sorted_products = self.queryset
+
+        if selected_categories_keys:
+            sorted_products = sorted_products.filter(kategori__in=selected_categories_keys)
+
+        context['categories'] = categories.values()
+        context['selected_categories'] = selected_categories_values
+        context['object_list'] = sorted_products
+
+        return context
 
 
 class HomeListView(generic.ListView):
