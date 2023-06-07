@@ -12,6 +12,8 @@ from django.conf import settings
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import authenticate,login,logout
+from django.views.decorators.csrf import csrf_protect
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def signup(request):
@@ -66,6 +68,7 @@ def signup(request):
 #             return redirect('/auth/login')
 #         return render(request,'account/activatefail.html') #jika gagal redirect ke activate fail
 
+@csrf_protect
 def handlelogin(request):
     if request.method=="POST":
 
@@ -83,6 +86,8 @@ def handlelogin(request):
 
     return render(request,'account/login.html')   
 
-
-def logout(request):
-    return redirect('/auth/signin')
+@csrf_protect
+def handle_logout(request):
+    logout(request)
+    # Untuk redirect ke page home ( / ) setelah logout
+    return redirect('/')
