@@ -34,13 +34,15 @@ class ContactPageView(generic.FormView):
 
     def form_valid(self, form):
         form.save()
-        # return super().form_valid(form)
         return redirect(self.get_success_url())
     
 def contact_success(request):
     return render(request, 'success-contact.html')
-    
 
+
+def about_view(request):
+        return render(request, 'about.html')
+    
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):
         form = CheckoutForm()
