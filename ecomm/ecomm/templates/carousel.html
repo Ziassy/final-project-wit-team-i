@@ -48,32 +48,18 @@
                             </div>
                             
                             <div class="card-body">
-                                <a href="{{ pItem.get_absolute_url }}" class="h3 text-decoration-none">{{ pItem.nama_produk }}</a>
+                                <a href="{{ pItem.get_absolute_url }}" class="h3 text-decoration-none"><b>{{ pItem.nama_produk }}</b></a>
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                    <li>M/L/X/XL</li>
-                                    <li class="pt-2">
-                                        <span
-                                            class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                        <span
-                                            class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                        <span
-                                            class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                        <span
-                                            class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                        <span
-                                            class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                    </li>
+                                    <li>Category : {{ pItem.get_kategori_display }}</li>
                                 </ul>
-                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                    <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                    </li>
-                                </ul>
-                                <p class="text-center mb-0">${% if pItem.harga_diskon %}{{ pItem.harga_diskon }}{% else %}{{ pItem.harga }}{% endif %}</p>
+
+                                <p class="text-center mb-0">
+                                    {% if pItem.harga_diskon %}
+                                    <span class="text-danger"><del>${{ pItem.harga }}</del></span>
+                                    <span><b>${{ pItem.harga_diskon }}</b></span>
+                                    {% else %}
+                                    <span>${{ pItem.harga }}</span>
+                                    {% endif %}</p>
                             </div>
                         </div>
                     </div>

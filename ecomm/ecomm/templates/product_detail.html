@@ -98,7 +98,7 @@
                             <h1 class="h2">{{ object.nama_produk }}</h1>
                             <p class="h3 py-2">
                                 {% if object.harga_diskon %}
-                                <span><del>${{ object.harga }}</del></span>
+                                <span class="text-danger"><del>${{ object.harga }}</del></span>
                                 <span><b>${{ object.harga_diskon }}</b></span>
                                 {% else %}
                                 <span>${{ object.harga }}</span>
