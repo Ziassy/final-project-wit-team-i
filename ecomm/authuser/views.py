@@ -75,7 +75,6 @@ def handlelogin(request):
 
         if myuser is not None and myuser.is_active:
             login(request,myuser)
-            messages.success(request,"Login Success")
             return redirect('/')
 
         else:
