@@ -26,8 +26,8 @@ def signup(request):
             messages.warning(request,"Passwords do not match. Please try again.")
             return render(request,'account/signup.html')                   
         try:
-            if User.objects.get(email=email) and User.objects.get(username=username):
-                # return HttpResponse("email already exist")
+            if User.objects.get(email=email) or User.objects.get(username=username):
+                # return HttpResponse("email and username already exist")
                 messages.info(request,"Email or Username already exists. Please choose a different email or username")
                 return render(request,'account/signup.html')
         except Exception as identifier:
