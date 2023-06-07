@@ -13,7 +13,7 @@ from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 def signup(request):

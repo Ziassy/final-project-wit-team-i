@@ -8,6 +8,7 @@ from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 from .forms import CheckoutForm, ContactForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Contact
@@ -206,7 +207,7 @@ def remove_from_cart(request, slug):
     else:
         return redirect('/accounts/login')
 
-# @csrf_exempt
+@csrf_exempt
 def paypal_return(request):
     if request.user.is_authenticated:
         try:
@@ -235,7 +236,7 @@ def paypal_return(request):
     else:
         return redirect('/accounts/login')
 
-# @csrf_exempt
+@csrf_exempt
 def paypal_cancel(request):
     messages.error(request, 'Pembayaran dibatalkan')
     return redirect('toko:order-summary')
