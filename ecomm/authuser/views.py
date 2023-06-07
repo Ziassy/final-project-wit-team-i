@@ -69,9 +69,9 @@ def signup(request):
 def handlelogin(request):
     if request.method=="POST":
 
-        email=request.POST['email']
-        userpassword=request.POST['pass1']
-        myuser=authenticate(email=email,password=userpassword)
+        username=request.POST['username']
+        password=request.POST['password']
+        myuser = authenticate(request, username=username, password=password)
 
         if myuser is not None and myuser.is_active:
             login(request,myuser)

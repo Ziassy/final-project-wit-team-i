@@ -13,51 +13,50 @@
 </head>
 
 <body>
-  <!-- partial:index.partial.html -->
-  <div class="logo text-center">
-    <h1>Log In</h1>
-  </div>
-  <div class="wrapper">
-    <div class="inner-warpper text-center">
-      <h2 class="title">Login to your account</h2>
-      {% for message in messages %}
-  
-      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-        <strong>{{message}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <!-- partial:index.partial.html -->
+    <div class="logo text-center">
+      <h1>Log In</h1>
+    </div>
+    <div class="wrapper">
+      <div class="inner-warpper text-center">
+        <h2 class="title">Login to your account</h2>
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+
+        <form action="/auth/login/" id="login_form" method="post">
+          {% csrf_token %}
+
+          <div class="input-group">
+            <label class="placeholder" for="username">Username</label>
+            <input class="form-control" name="username" id="username" type="text" />
+            <span class="lighting"></span>
+          </div>
+          <div class="input-group">
+            <label class="placeholder" for="pass1">Password</label>
+            <input class="form-control" name="password" id="pass1" type="password" />
+            <span class="lighting"></span>
+          </div>
+
+          <button type="submit" id="login">Login</button>
+          <div class="clearfix supporter">
+            <a class="forgot pull-right" href="#">Forgot Password?</a>
+          </div>
+        </form>
       </div>
-      {% endfor %}
-
-      <form action="/auth/login/" id="login_form" method="post">
-        {% csrf_token %}
-
-        <div class="input-group">
-          <label class="palceholder" for="email">Email</label>
-          <input class="form-control" name="email" id="email" type="text"/>
-          <span class="lighting"></span>
-        </div>
-        <div class="input-group">
-          <label class="palceholder" for="pass1">Password</label>
-          <input class="form-control" name="pass1" id="pass1" type="password"=/>
-          <span class="lighting"></span>
-        </div>
-
-        <button type="submit" id="login">Login</button>
-        <div class="clearfix supporter">
-          <a class="forgot pull-right" href="#">Forgot Password?</a>
-        </div>
-      </form>
+      <div class="signup-wrapper text-center">
+        <a href="/auth/signup/">Don't have an account? <span class="text-primary">Create One</span></a>
+      </div>
     </div>
-    <div class="signup-wrapper text-center">
-      <a href="/auth/signup/">Don't have an accout? <span class="text-primary">Create One</span></a>
-    </div>
-  </div>
 
-  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script>
-  <script src="{% static '/js/script.js' %}"></script>
-  <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script>
+    <script src="{% static '/js/script.js' %}"></script>
+    <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
+
 
 </html>
