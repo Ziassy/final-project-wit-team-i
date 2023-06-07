@@ -25,7 +25,7 @@
                         <th>Product Name</th>
                         <th class="text-center">Quantity</th>
                         <th class="text-center">Subtotal</th>
-                        <th class="text-center">Discount</th>
+                        <th class="text-center">Normal Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +34,7 @@
                         <td>
                             <div class="product-item">
                                 <a class="product-thumb" href="{% url 'toko:produk-detail' pItem.produk_item.slug %}"><img
-                                        src="{{ pItem.produk_item.gambar.url }}" alt="Product"></a>
+                                        src="{{ pItem.produk_item.gambar.url }}" alt="Product" style="height:80px"></a>
                                 <div class="product-info">
                                     <h4 class="product-title"><a href="#">{{ pItem.produk_item.nama_produk }}</a></h4>
                                     <span><em>Desc:</em>
@@ -54,7 +54,7 @@
                         </td>
                         <td class="text-center text-lg text-medium">
                         {% if pItem.produk_item.harga_diskon %}
-                        ${{ pItem.get_total_harga_diskon_item }}
+                        <span class="text-danger"><del>${{ pItem.get_total_harga_item }}</del></span>
                         <span class="badge badge-danger rounded-pill d-inline">Hemat ${{ pItem.get_total_hemat_item }}</span>
                         {% else %}
                         ${{ pItem.get_total_harga_item }}
