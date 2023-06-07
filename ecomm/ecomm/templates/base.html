@@ -1,3 +1,4 @@
+{% load cart_template_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +80,7 @@
                             </div>
                         </div>
                     </div>
+                    {% if request.user.is_authenticated%}
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
                         data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
@@ -86,13 +88,20 @@
                     <a class="nav-icon position-relative text-decoration-none" href="{% url 'toko:order-summary' %}">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">{{ request.user|total_produk_dikeranjang }}</span>
                     </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'account_logout' %}">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    {% else %}
                     <a class="nav-icon position-relative text-decoration-none" href="auth/login">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
+                    {% endif %}
                 </div>
             </div>
 
