@@ -17,7 +17,7 @@ PILIHAN_LABEL = (
 
 PILIHAN_PEMBAYARAN = (
     ('P', 'Paypal'),
-    ('S', 'Stripe'),
+    ('S', 'COD'),
 )
 
 User = get_user_model()

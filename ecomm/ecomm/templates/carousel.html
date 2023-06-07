@@ -33,11 +33,11 @@
 
             <div class="col-lg-9">
                 <div class="row">
+                    {% for pItem in object_list %}
                     <div class="col-md-4">
-                        {% for pItem in object_list %}
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="{{ pItem.gambar.url }}">
+                                <img class="card-img rounded-0 img-fluid" src="{{ pItem.gambar.url }}" style="height: 300px;">
                                 <div
                                     class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
