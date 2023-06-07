@@ -26,7 +26,6 @@
                         <th class="text-center">Quantity</th>
                         <th class="text-center">Subtotal</th>
                         <th class="text-center">Discount</th>
-                        <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Clear Cart</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,11 +64,8 @@
                                 data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     {% empty %}
-                    <tr>
-                        <td colspan='5' class='text-center'>Keranjang kosong</td>
-                    </tr>
-                        <td colspan='5'><a class="btn btn-outline-secondary" href="#"><i class="icon-arrow-left"></i>&nbsp;Back
-                         to Shopping</a></td>
+                    {% block content %}
+                    {% endblock %}
                     {% endfor %}
                 </tbody>
             </table>

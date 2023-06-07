@@ -41,7 +41,11 @@ def contact_success(request):
 
 
 def about_view(request):
-        return render(request, 'about.html')
+    return render(request, 'about.html')
+
+def empty_view_order_summary(request):
+    return render(request, 'empty_order_summary.html')
+    
     
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):
@@ -136,8 +140,8 @@ class OrderSummaryView(LoginRequiredMixin, generic.TemplateView):
             template_name = 'order_summary.html'
             return render(self.request, template_name, context)
         except ObjectDoesNotExist:
-            messages.error(self.request, 'Tidak ada pesanan yang aktif')
-            return redirect('/')
+            # messages.error(self.request, 'Tidak ada pesanan yang aktif')
+             return redirect('toko:empty-order-summary')
 
 def add_to_cart(request, slug):
     if request.user.is_authenticated:
