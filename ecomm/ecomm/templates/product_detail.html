@@ -3,104 +3,171 @@
 {% block content%}
 
 <!--Main layout-->
-<main class="mt-5 pt-4">
-    <div class="container mt-5">
-        <!--Grid row-->
-        <div class="row">
-            <!--Grid column-->
-            <div class="col-md-6 mb-4">
-                <img src="{{ object.gambar.url }}" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-md-6 mb-4">
-                <!--Content-->
-                <div class="p-4">
-                    <div class="mb-3">
-                        <a href="">
-                            <span class="badge bg-dark me-1">{{ object.get_kategori_display }}</span>
-                        </a>
-                        {% if object.label == 'NEW' %}
-                        <a href="">
-                            <span class="badge bg-{{ object.get_label_display }} me-1">New</span>
-                        </a>
-                        {% elif object.label == 'SALE' %}
-                        <a href="">
-                            <span class="badge bg-{{ object.get_label_display }} me-1">Sale</span>
-                        </a>
-                        {% else %}
-                        <a href="">
-                            <span class="badge bg-{{ object.get_label_display }} me-1">Bestseller</span>
-                        </a>
-                        {% endif %}
+    <!-- Open Content -->
+    <section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-5 mt-5">
+                    <div class="card mb-3">
+                        <img class="card-img img-fluid" src="{{ object.gambar.url }}" alt="Card image cap"
+                            id="product-detail">
                     </div>
+                    <div class="row">
+                        <!--Start Controls-->
+                        <div class="col-1 align-self-center">
+                            <a href="#multi-item-example" role="button" data-bs-slide="prev">
+                                <i class="text-dark fas fa-chevron-left"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </div>
+                        <!--End Controls-->
+                        <!--Start Carousel Wrapper-->
+                        <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item"
+                            data-bs-ride="carousel">
+                            <!--Start Slides-->
+                            <div class="carousel-inner product-links-wap" role="listbox">
 
-                    <p class="lead">
-                        {% if object.harga_diskon %}
-                        <span class="me-1">
-                            <del>${{ object.harga }}</del>
-                        </span>
-                        <span>${{ object.harga_diskon }}</span>
-                        {% else %}
-                        <span>${{ object.harga }}</span>
-                        {% endif %}
-                    </p>
+                                <!--First slide-->
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="assets/img/product_single_01.jpg"
+                                                    alt="Product Image 1">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="assets/img/product_single_02.jpg"
+                                                    alt="Product Image 2">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="assets/img/product_single_03.jpg"
+                                                    alt="Product Image 3">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.First slide-->
 
-                    <strong><p style="font-size: 20px;">Deskripsi</p></strong>
+                                <!--Second slide-->
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="assets/img/product_single_04.jpg"
+                                                    alt="Product Image 4">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="assets/img/product_single_05.jpg"
+                                                    alt="Product Image 5">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="assets/img/product_single_06.jpg"
+                                                    alt="Product Image 6">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.Second slide-->
 
-                    <p>{{ object.deskripsi }}</p>
-                    <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary ms-1">
-                        Tambah ke keranjang
-                        <i class="fas fa-shopping-cart ms-1"></i>
-                    </a>
-                    <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger ms-1" >
-                        Kurangi keranjang
-                        <i class="fas fa-shopping-cart ms-1"></i>
-                    </a>
+                            </div>
+                            <!--End Slides-->
+                        </div>
+                        <!--End Carousel Wrapper-->
+                        <!--Start Controls-->
+                        <div class="col-1 align-self-center">
+                            <a href="#multi-item-example" role="button" data-bs-slide="next">
+                                <i class="text-dark fas fa-chevron-right"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <!--End Controls-->
+                    </div>
                 </div>
-                <!--Content-->
+                <!-- col end -->
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="h2">{{ object.nama_produk }}</h1>
+                            <p class="h3 py-2">
+                                {% if object.harga_diskon %}
+                                <span><del>${{ object.harga }}</del></span>
+                                <span><b>${{ object.harga_diskon }}</b></span>
+                                {% else %}
+                                <span>${{ object.harga }}</span>
+                                {% endif %}
+                            </p>
+                            <p class="py-2">
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                            </p>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6>Category:</h6>
+                                </li>
+                                <li class="list-inline-item">
+                                    <p class="text-muted"><strong>{{ object.get_kategori_display }}</strong></p>
+                                </li>
+                            </ul>
+
+                            <h6>Description:</h6>
+                            <p>{{ object.deskripsi }}</p>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6>Label</h6>
+                                </li>
+                                {% if object.label == 'NEW' %}
+                                <li class="list-inline-item">
+                                    <p class="text-muted"><strong>New</strong></p>
+                                </li>
+                                {% elif object.label == 'SALE' %}
+                                <li class="list-inline-item">
+                                    <p class="text-muted"><strong>Sale</strong></p>
+                                </li>
+                                {% else %}
+                               <li class="list-inline-item">
+                                    <p class="text-muted"><strong>Best Seller</strong></p>
+                                </li>
+                                {% endif %}
+
+                            </ul>
+
+                            <form action="" method="GET">
+                                <input type="hidden" name="product-title" value="Activewear">
+
+                                <div class="row pb-3">
+                                    <div class="col d-grid">
+                                        {% comment %} <button type="submit" class="btn btn-success btn-lg" name="submit"
+                                            value="addtocard">+ Add to cart</button> {% endcomment %}
+                                         <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success py-2">
+                                            + Add to cart
+                                        </a>
+                                    </div>
+                                    <div class="col d-grid">
+                                         <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger py-2">
+                                            + Remove from cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--Grid column-->
         </div>
-        <!--Grid row-->
-
-        <hr />
-
-        <!--Grid row-->
-        <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-md-6 text-center">
-                <h4 class="my-4 h4">Additional information</h4>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
-
-        <!--Grid row-->
-        <div class="row">
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-12 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
-    </div>
-</main>
+    </section>
+    <!-- Close Content -->
 <!--Main layout-->
 {% endblock content%}
