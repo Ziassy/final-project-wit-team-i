@@ -6,7 +6,8 @@ from django.urls import reverse
 PILIHAN_KATEGORI = (
     ('S', 'Shirt'),
     ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('OW', 'Outwear'),
+    ('C', 'Cosmetic')
 )
 
 PILIHAN_LABEL = (
