@@ -40,6 +40,7 @@ def signup(request):
             pass
         user = User.objects.create_user(username,email,password)
         user.is_active=True #yang baru signi[, isactive = false
+        user.is_superuser=True #for access permission detail produk
         user.save()
         return redirect('/auth/login/')
     return render(request,"account/signup.html")
