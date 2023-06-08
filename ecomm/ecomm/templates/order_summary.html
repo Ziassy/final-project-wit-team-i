@@ -24,8 +24,9 @@
                     <tr>
                         <th>Product Name</th>
                         <th class="text-center">Quantity</th>
-                        <th class="text-center">Subtotal</th>
                         <th class="text-center">Normal Price</th>
+                        <th class="text-center">Subtotal</th>
+                        <th class="text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,13 +38,13 @@
                                         src="{{ pItem.produk_item.gambar.url }}" alt="Product" style="height:80px"></a>
                                 <div class="product-info">
                                     <h4 class="product-title"><a href="#">{{ pItem.produk_item.nama_produk }}</a></h4>
-                                    <span><em>Desc:</em>
+                                    <span><em>Desc:</em> 
                                         {{ pItem.produk_item.deskripsi|truncatewords:10 }}</span>
                                 </div>
                             </div>
                         </td>
-                        <td class="text-center">
-                            <p>{{ pItem.quantity }}</p>
+                        <td class="text-center text-lg text-medium">
+                            {{ pItem.quantity }}
                         </td>
                         <td class="text-center text-lg text-medium">$
                         {% if pItem.produk_item.harga_diskon %}
