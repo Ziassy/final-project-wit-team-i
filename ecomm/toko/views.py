@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils import timezone
 from django.views import generic
@@ -9,7 +9,6 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import permission_required
 
@@ -80,6 +79,14 @@ def empty_view_order_summary(request):
     
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):
+        order = get_object_or_404(Order, user=self.request.user, ordered=False)
+
+        # Handle Insecure direct object reference
+        # Check if the order belongs to the current user
+        if order.user != self.request.user:
+            raise PermissionDenied('You are not authorized to access this order.')
+        
+        
         form = CheckoutForm()
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
@@ -108,6 +115,14 @@ class CheckoutView(LoginRequiredMixin, generic.FormView):
                 negara = form.cleaned_data.get('negara')
                 kode_pos = form.cleaned_data.get('kode_pos')
                 opsi_pembayaran = form.cleaned_data.get('opsi_pembayaran')
+                
+                 # Validate opsi_pembayaran to prevent unauthorized payment method selection
+                allowed_payment_methods = ['P', 'S']  # Add the allowed payment method codes
+                
+                # Parameter Tampering Prevention
+                if opsi_pembayaran not in allowed_payment_methods:
+                    raise PermissionDenied('Invalid payment method selected')
+                
                 alamat_pengiriman = AlamatPengiriman(
                     user=self.request.user,
                     alamat_1=alamat_1,
