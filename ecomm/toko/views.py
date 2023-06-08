@@ -9,6 +9,9 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import permission_required
 
 from .forms import CheckoutForm, ContactForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Contact, PILIHAN_KATEGORI
@@ -45,9 +48,15 @@ class HomeListView(generic.ListView):
     queryset = ProdukItem.objects.all()
     paginate_by = 4
 
+# Handle insecure Direct object reference, need login
+@method_decorator(permission_required('app.view_produk'), name='dispatch') 
 class ProductDetailView(generic.DetailView):
     template_name = 'product_detail.html'
     queryset = ProdukItem.objects.all()
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
     
 class ContactPageView(generic.FormView):
     template_name = 'contact.html'

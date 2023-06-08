@@ -66,8 +66,8 @@
                             </ul>
 
                             <form action="" method="GET">
+                            {% csrf_token %}
                                 <input type="hidden" name="product-title" value="Activewear">
-
                                 <div class="row pb-3">
                                     <div class="col d-grid">
                                          <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success py-2">
