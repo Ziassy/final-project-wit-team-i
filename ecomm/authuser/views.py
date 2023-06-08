@@ -13,7 +13,7 @@ from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_protect
-
+import re
 
 # Create your views here.
 def signup(request):
@@ -24,11 +24,17 @@ def signup(request):
         confirm_password=request.POST['pass2']
         if password!=confirm_password:
             messages.warning(request,"Passwords do not match. Please try again.")
-            return render(request,'account/signup.html')                   
+            return render(request,'account/signup.html') 
+        
+        # Password validation
+        if len(password) < 5 or not re.search('\d', password) or not re.search('[!@#$%^&*]', password):
+            messages.error(request, "Password must be at least 5 characters and contain at least one number and one special character (!@#$%^&*)")
+            return render(request, 'account/signup.html')
+                          
         try:
             if User.objects.get(email=email) or User.objects.get(username=username):
                 # return HttpResponse("email and username already exist")
-                messages.info(request,"Email or Username already exists. Please choose a different email or username")
+                messages.error(request,"Email or Username already exists. Please choose a different email or username")
                 return render(request,'account/signup.html')
         except Exception as identifier:
             pass
