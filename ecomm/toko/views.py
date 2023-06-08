@@ -27,6 +27,7 @@ class ProductList(generic.ListView):
             'S': 'Shirt',
             'SW': 'Sportswear',
             'OW': 'Outerwear'
+            'C': 'Cosmetic'
         }  # Dictionary mapping category codes to their corresponding names
         selected_categories_values = self.request.GET.getlist('category')  # Get selected categories from the request
         selected_categories_keys = [category for category, name in categories.items() if name in selected_categories_values]
